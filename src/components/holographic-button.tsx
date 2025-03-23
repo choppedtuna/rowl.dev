@@ -7,6 +7,8 @@ import { ButtonProps } from '@mui/material/Button';
 const StyledButton = styled(Button)(({ theme }) => ({
   position: 'relative',
   overflow: 'hidden',
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
   '&::before': {
     content: '""',
     position: 'absolute',

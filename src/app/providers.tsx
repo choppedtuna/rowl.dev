@@ -66,11 +66,28 @@ const createAppTheme = (mode: PaletteMode) => {
 
 function MUIProviderWithNextTheme({ children }: { children: ReactNode }) {
   const { resolvedTheme } = useTheme();
-  const [theme, setTheme] = useState(createAppTheme('light'));
+  const [mounted, setMounted] = useState(false);
+  
+  // Initialize with the correct theme based on local storage if available
+  const [theme, setTheme] = useState(() => {
+    // Default to dark theme to prevent flash
+    return createAppTheme('dark');
+  });
   
   useEffect(() => {
-    setTheme(createAppTheme((resolvedTheme as PaletteMode) || 'light'));
+    setMounted(true);
+    setTheme(createAppTheme((resolvedTheme as PaletteMode) || 'dark'));
   }, [resolvedTheme]);
+  
+  // Render a placeholder or simple UI while loading to prevent flash
+  if (!mounted) {
+    return (
+      <MUIThemeProvider theme={createAppTheme('dark')}>
+        <CssBaseline />
+        <div style={{ visibility: 'hidden' }}>{children}</div>
+      </MUIThemeProvider>
+    );
+  }
 
   return (
     <MUIThemeProvider theme={theme}>
@@ -81,6 +98,16 @@ function MUIProviderWithNextTheme({ children }: { children: ReactNode }) {
 }
 
 export function Providers({ children }: { children: ReactNode }) {
+  // Add useEffect to set color-scheme immediately
+  useEffect(() => {
+    // Try to get the theme from localStorage first
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || 
+        (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.style.colorScheme = 'dark';
+    }
+  }, []);
+
   return (
     <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
       <MUIProviderWithNextTheme>{children}</MUIProviderWithNextTheme>

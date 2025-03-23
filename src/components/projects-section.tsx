@@ -259,7 +259,7 @@ export default function ProjectsSection() {
   return (
     <Box 
       component="section" 
-      id="projects" 
+      id="portfolio" 
       className="section-container"
       sx={{ 
         py: 10,

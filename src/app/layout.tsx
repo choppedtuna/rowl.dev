@@ -1,10 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { JetBrains_Mono } from 'next/font/google'
 import { Providers } from './providers'
 import Layout from '@/components/layout'
 
-const inter = Inter({ subsets: ['latin'] })
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'rowl.dev',
@@ -18,7 +18,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
+        <meta name="color-scheme" content="dark light" />
+        <style dangerouslySetInnerHTML={{ 
+          __html: `
+            :root { color-scheme: dark; }
+            body { background-color: hsl(var(--background)); }
+          `
+        }} />
+      </head>
+      <body className={jetbrainsMono.className}>
         <Providers>
           <Layout>
             {children}

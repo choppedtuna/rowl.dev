@@ -94,7 +94,7 @@ export default function AccomplishmentsSection() {
   return (
     <Box 
       component="section" 
-      id="accomplishments" 
+      id="achievements" 
       className="section-container"
       sx={{ 
         py: 8,
