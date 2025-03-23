@@ -1,12 +1,13 @@
 import type { Metadata } from "next"
 import HeroSection from "@/components/hero-section"
 import ProjectsSection from "@/components/projects-section"
+import ExperienceSection from "@/components/experience-section"
 import AccomplishmentsSection from "@/components/accomplishments-section"
 import ContactSection from "@/components/contact-section"
 import { Box } from "@mui/material"
 
 export const metadata: Metadata = {
-  title: "Senior ROBLOX Programmer Portfolio",
+  title: "Ben Rowlands (rowl.dev)",
   description: "Portfolio showcasing ROBLOX programming projects and skills",
 }
 
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Box component="main">
         <HeroSection />
         <ProjectsSection />
+        <ExperienceSection />
         <AccomplishmentsSection />
         <ContactSection />
       </Box>

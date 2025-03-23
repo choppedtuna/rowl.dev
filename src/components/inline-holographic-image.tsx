@@ -145,23 +145,46 @@ export default function InlineHolographicImage({
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Mark component as mounted to avoid hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Get image dimensions after load
   useEffect(() => {
     if (imageRef.current) {
       const updateDimensions = () => {
-        setDimensions({
-          width: imageRef.current?.offsetWidth || 0,
-          height: imageRef.current?.offsetHeight || 0
-        });
+        if (imageRef.current) {
+          setDimensions({
+            width: imageRef.current.offsetWidth || 0,
+            height: imageRef.current.offsetHeight || 0
+          });
+        }
       };
 
       // Initial update
       updateDimensions();
 
-      // Update on resize
-      window.addEventListener('resize', updateDimensions);
-      return () => window.removeEventListener('resize', updateDimensions);
+      // Update after image loads
+      imageRef.current.addEventListener('load', updateDimensions, { once: true });
+
+      // Update on resize with debounce
+      let resizeTimeout: NodeJS.Timeout;
+      const debouncedResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateDimensions, 100);
+      };
+      window.addEventListener('resize', debouncedResize);
+      
+      return () => {
+        window.removeEventListener('resize', debouncedResize);
+        if (imageRef.current) {
+          imageRef.current.removeEventListener('load', updateDimensions);
+        }
+        clearTimeout(resizeTimeout);
+      };
     }
   }, []);
 
@@ -171,14 +194,17 @@ export default function InlineHolographicImage({
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      
-      setPosition({ x, y });
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        const rect = containerRef.current!.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        setPosition({ x, y });
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
@@ -193,16 +219,35 @@ export default function InlineHolographicImage({
     filter: 'contrast(1.5)'
   };
 
+  // Calculate container dimensions to prevent layout shift
+  const containerStyle = {
+    borderRadius: 'inherit',
+    overflow: 'hidden',
+    width: width ? `${width}px` : (dimensions.width ? `${dimensions.width}px` : 'auto'),
+    height: height ? `${height}px` : (dimensions.height ? `${dimensions.height}px` : 'auto'),
+    aspectRatio: width && height ? `${width} / ${height}` : 'auto',
+    willChange: 'transform',
+    transform: 'translate3d(0, 0, 0)',
+    ...style
+  };
+
+  // If not yet mounted, return placeholder with dimensions
+  if (!mounted) {
+    return (
+      <MaskedContainer 
+        sx={{
+          ...containerStyle,
+          background: 'rgba(0,0,0,0.1)'
+        }}
+        className={className}
+      />
+    );
+  }
+
   return (
     <MaskedContainer 
       ref={containerRef}
-      sx={{
-        borderRadius: 'inherit',
-        overflow: 'hidden',
-        width: dimensions.width || width,
-        height: dimensions.height || height,
-        ...style
-      }}
+      sx={containerStyle}
       className={className}
     >
       {/* Original visible image - this will be the base layer */}
@@ -229,6 +274,7 @@ export default function InlineHolographicImage({
         sx={{
           ...dynamicStyle,
           zIndex: 2,
+          willChange: onMouseMove ? 'transform, background-position, filter' : 'auto',
         }} 
       />
       
@@ -237,7 +283,8 @@ export default function InlineHolographicImage({
         src={src}
         sx={{
           zIndex: 3,
-          opacity: intensity * 0.95
+          opacity: intensity * 0.95,
+          willChange: 'filter',
         }} 
       />
       
@@ -247,7 +294,8 @@ export default function InlineHolographicImage({
           src={src}
           sx={{
             zIndex: 4,
-            opacity: intensity * 0.8
+            opacity: intensity * 0.8,
+            willChange: 'transform',
           }} 
         />
       )}

@@ -78,6 +78,12 @@ export default function HolographicImage({
 }: HolographicImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  // Mark component as mounted to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!onMouseMove || !containerRef.current) return;
@@ -85,14 +91,17 @@ export default function HolographicImage({
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      
-      setPosition({ x, y });
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        const rect = containerRef.current!.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        setPosition({ x, y });
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
@@ -103,15 +112,36 @@ export default function HolographicImage({
     filter: `hue-rotate(${(position.x + position.y) * 360}deg)`,
   } : {};
 
+  // Calculate dimensions for container to prevent layout shifts
+  const containerStyle = {
+    position: 'relative',
+    overflow: 'hidden',
+    display: 'inline-block',
+    width: width ? `${width}px` : 'auto',
+    height: height ? `${height}px` : 'auto',
+    aspectRatio: width && height ? `${width} / ${height}` : 'auto',
+    willChange: onMouseMove ? 'transform, background-position' : 'auto',
+    transform: 'translate3d(0, 0, 0)',
+    ...style
+  };
+
+  if (!mounted) {
+    // Return a placeholder with the same dimensions during SSR
+    return (
+      <Box 
+        sx={{
+          ...containerStyle,
+          background: 'rgba(0,0,0,0.1)'
+        }}
+        className={className}
+      />
+    );
+  }
+
   return (
     <Box 
       ref={containerRef}
-      sx={{
-        position: 'relative',
-        overflow: 'hidden',
-        display: 'inline-block',
-        ...style
-      }}
+      sx={containerStyle}
       className={className}
     >
       <Image 
@@ -124,12 +154,13 @@ export default function HolographicImage({
           position: 'relative',
           zIndex: 1,
           maxWidth: '100%',
-          height: 'auto'
+          height: 'auto',
+          display: 'block'
         }}
         priority={priority}
       />
-      <HolographicOverlay sx={dynamicStyle} />
-      {showShine && <ShineEffect />}
+      <HolographicOverlay sx={{...dynamicStyle, willChange: onMouseMove ? 'background-position, filter' : 'auto'}} />
+      {showShine && <ShineEffect sx={{willChange: 'transform'}} />}
     </Box>
   );
 } 

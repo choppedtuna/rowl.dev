@@ -69,41 +69,50 @@ export default function TechBackground({
   
   // Generate rotation animation keyframes
   const getRotationAnimation = () => {
-    return rotateAnimation ? {
+    if (!rotateAnimation) return {};
+    
+    // Use transform: translate3d to trigger GPU acceleration
+    return {
       animation: `${getBaseAnimation()} ${variant === 'grid' ? ', rotate 120s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate' : ''}`,
       '@keyframes rotate': {
-        '0%': { transform: 'rotate(0deg)' },
-        '100%': { transform: 'rotate(360deg)' }
+        '0%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+        '100%': { transform: 'translate3d(0, 0, 0) rotate(360deg)' }
       }
-    } : {};
+    };
   };
   
-  // Get base animation for the variant
+  // Get base animation for the variant - optimize animations to reduce layout shifts
   const getBaseAnimation = () => {
+    if (!animated) return '';
+    
     switch (variant) {
       case 'circuit':
-        return animated ? 'circuitMove 60s ease-in-out infinite alternate-reverse' : '';
+        return 'circuitMove 60s ease-in-out infinite alternate-reverse';
       case 'dots':
-        return animated ? 'dotsPulse 10s ease-in-out infinite' : '';
+        return 'dotsPulse 10s ease-in-out infinite';
       case 'hexagons':
-        return animated ? 'hexRotate 80s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate' : '';
+        return 'hexRotate 80s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate';
       case 'matrix':
-        return animated ? 'matrixPan 100s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate' : '';
+        return 'matrixPan 100s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate';
       case 'grid':
       default:
-        return animated ? 'gridShift 60s ease-in-out infinite alternate' : '';
+        return 'gridShift 60s ease-in-out infinite alternate';
     }
   };
   
-  // Generate hover interaction styles - modified to prevent disappearance
+  // Generate hover interaction styles - modified to prevent layout shifts
   const getHoverInteraction = () => {
-    return hoverInteraction ? {
-      transition: 'all 1.5s ease-in-out',
-      '.section-container:hover &': {
-        transform: 'scale(1.05) rotate(2deg)',
-        opacity: opacity * 1.3,
-      }
-    } : {
+    if (hoverInteraction) {
+      return {
+        transition: 'all 1.5s ease-in-out',
+        willChange: 'transform, opacity',
+        '.section-container:hover &': {
+          transform: 'translate3d(0, 0, 0) scale(1.05) rotate(2deg)',
+          opacity: opacity * 1.3,
+        }
+      };
+    }
+    return {
       transition: 'all 1.5s ease-in-out',
     };
   };
@@ -206,6 +215,9 @@ export default function TechBackground({
         height: '100%',
         zIndex: 0,
         transformOrigin: 'center center',
+        willChange: animated || rotateAnimation ? 'transform, background-position' : 'auto',
+        transform: 'translate3d(0, 0, 0)', // Force GPU acceleration
+        backfaceVisibility: 'hidden', // Additional GPU acceleration
         ...getBackgroundPattern(),
         ...sx,
       }}

@@ -6,8 +6,8 @@ import Grid from '@mui/material/Grid';
 import PersonIcon from '@mui/icons-material/Person';
 import SendIcon from '@mui/icons-material/Send';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import Image from 'next/image';
 import HolographicImage from './holographic-image';
-import InlineHolographicImage from './inline-holographic-image';
 import TechBackground from './tech-background';
 
 export default function ContactSection() {
@@ -33,8 +33,8 @@ export default function ContactSection() {
       <TechBackground 
         variant="matrix" 
         opacity={0.09} 
-        animated={true}
-        rotateAnimation={true}
+        animated={false}
+        rotateAnimation={false}
         gradientFade={true}
         gradientAngle={225}
         edgeFade={true}
@@ -61,9 +61,12 @@ export default function ContactSection() {
                 boxShadow: theme => `0 8px 24px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
                 position: 'relative',
                 zIndex: 2,
-                transition: 'all 0.4s ease',
+                transition: 'transform 0.4s ease',
+                willChange: 'transform, box-shadow',
+                transform: 'translate3d(0, 0, 0)',
+                minHeight: {xs: 'auto', md: '320px'},
                 '&:hover': {
-                  transform: 'translateY(-5px)',
+                  transform: 'translate3d(0, -5px, 0)',
                   boxShadow: theme => `0 12px 28px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.15)'}`
                 }
               }}
@@ -71,7 +74,8 @@ export default function ContactSection() {
               <Box 
                 sx={{ 
                   mb: 4,
-                  transition: 'all 0.4s ease'
+                  transition: 'transform 0.4s ease',
+                  willChange: 'transform'
                 }}
               >
                 <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom>
@@ -95,10 +99,12 @@ export default function ContactSection() {
                   backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
                   boxShadow: 1,
                   border: '1px solid rgba(255, 255, 255, 0.12)',
+                  willChange: 'transform, box-shadow',
+                  transform: 'translate3d(0, 0, 0)',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
                   '&:hover': {
                     boxShadow: 2,
-                    transform: 'translateY(-2px)',
-                    transition: 'all 0.2s'
+                    transform: 'translate3d(0, -2px, 0)'
                   },
                   cursor: 'pointer'
                 }}>
@@ -120,16 +126,111 @@ export default function ContactSection() {
                     >
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <ListItemIcon sx={{ minWidth: 48 }}>
-                          <InlineHolographicImage 
-                            src="/images/roblox-icon.png" 
-                            alt="Roblox"
-                            width={32}
-                            height={32}
-                            intensity={0.85}
-                          />
+                          <Box
+                            sx={{
+                              position: 'relative',
+                              width: 32,
+                              height: 32,
+                              filter: 'invert(41%) sepia(57%) saturate(7414%) hue-rotate(199deg) brightness(91%) contrast(101%)',
+                              transition: 'transform 0.2s',
+                              '&:hover': {
+                                transform: 'scale(1.1)'
+                              }
+                            }}
+                          >
+                            <Image 
+                              src="/images/roblox-icon.png" 
+                              alt="Roblox"
+                              width={32}
+                              height={32}
+                              style={{
+                                width: '100%',
+                                height: '100%'
+                              }}
+                            />
+                          </Box>
                         </ListItemIcon>
                         <ListItemText 
                           primary="b_rowl" 
+                          primaryTypographyProps={{ 
+                            variant: 'body1',
+                            fontWeight: 500,
+                            fontSize: '1.1rem'
+                          }}
+                        />
+                      </Box>
+                      <OpenInNewIcon 
+                        fontSize="small" 
+                        color="action" 
+                        sx={{ 
+                          opacity: 0.7,
+                          ml: 1
+                        }} 
+                      />
+                    </ListItem>
+                  </MuiLink>
+                </Box>
+                
+                <Box sx={{ 
+                  mb: 2,
+                  p: 2, 
+                  borderRadius: 2, 
+                  backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
+                  boxShadow: 1,
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  willChange: 'transform, box-shadow',
+                  transform: 'translate3d(0, 0, 0)',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  '&:hover': {
+                    boxShadow: 2,
+                    transform: 'translate3d(0, -2px, 0)'
+                  },
+                  cursor: 'pointer'
+                }}>
+                  <MuiLink 
+                    href="https://www.linkedin.com/in/benjamin-rowlands/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    color="inherit"
+                    underline="none"
+                    sx={{ display: 'block' }}
+                  >
+                    <ListItem 
+                      disableGutters 
+                      sx={{ 
+                        py: 1,
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <ListItemIcon sx={{ minWidth: 48 }}>
+                          <Box
+                            sx={{
+                              position: 'relative',
+                              width: 32,
+                              height: 32,
+                              filter: 'invert(41%) sepia(57%) saturate(7414%) hue-rotate(199deg) brightness(91%) contrast(101%)',
+                              transition: 'transform 0.2s',
+                              '&:hover': {
+                                transform: 'scale(1.1)'
+                              }
+                            }}
+                          >
+                            <Image 
+                              src="/images/linkedin-icon.png" 
+                              alt="LinkedIn"
+                              width={32}
+                              height={32}
+                              style={{
+                                width: '100%',
+                                height: '100%'
+                              }}
+                            />
+                          </Box>
+                        </ListItemIcon>
+                        <ListItemText 
+                          primary="Benjamin Rowlands" 
                           primaryTypographyProps={{ 
                             variant: 'body1',
                             fontWeight: 500,
@@ -155,21 +256,39 @@ export default function ContactSection() {
                   backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
                   boxShadow: 1,
                   border: '1px solid rgba(255, 255, 255, 0.12)',
+                  willChange: 'transform, box-shadow',
+                  transform: 'translate3d(0, 0, 0)',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
                   '&:hover': {
                     boxShadow: 2,
-                    transform: 'translateY(-2px)',
-                    transition: 'all 0.2s'
+                    transform: 'translate3d(0, -2px, 0)'
                   }
                 }}>
                   <ListItem disableGutters sx={{ py: 1 }}>
                     <ListItemIcon sx={{ minWidth: 48 }}>
-                      <InlineHolographicImage 
-                        src="/images/email-icon.png" 
-                        alt="Email"
-                        width={32}
-                        height={32}
-                        intensity={0.85}
-                      />
+                      <Box
+                        sx={{
+                          position: 'relative',
+                          width: 32,
+                          height: 32,
+                          filter: 'invert(41%) sepia(57%) saturate(7414%) hue-rotate(199deg) brightness(91%) contrast(101%)',
+                          transition: 'transform 0.2s',
+                          '&:hover': {
+                            transform: 'scale(1.1)'
+                          }
+                        }}
+                      >
+                        <Image 
+                          src="/images/email-icon.png" 
+                          alt="Email"
+                          width={32}
+                          height={32}
+                          style={{
+                            width: '100%',
+                            height: '100%'
+                          }}
+                        />
+                      </Box>
                     </ListItemIcon>
                     <ListItemText 
                       primary="browlands99@gmail.com" 
@@ -186,7 +305,12 @@ export default function ContactSection() {
           </Grid>
           
           <Grid item xs={12} md={7}>
-            <Paper elevation={2} sx={{ p: 4 }}>
+            <Paper elevation={2} sx={{ 
+              p: 4,
+              minHeight: {xs: 'auto', md: '320px'},
+              height: '100%',
+              transform: 'translate3d(0, 0, 0)'
+            }}>
               <form>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={6}>
