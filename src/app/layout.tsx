@@ -7,7 +7,7 @@ import Layout from '@/components/layout'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Senior ROBLOX Developer Portfolio',
+  title: 'rowl.dev',
   description: 'Portfolio showcasing ROBLOX programming projects and skills',
 }
 

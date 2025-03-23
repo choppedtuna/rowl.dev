@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import StarIcon from '@mui/icons-material/Star';
 import LaunchIcon from '@mui/icons-material/Launch';
+import TechBackground from './tech-background';
 
 // Configure universe IDs here - easy to modify
 const PROJECTS_CONFIG = [
@@ -256,14 +257,54 @@ export default function ProjectsSection() {
   ];
 
   return (
-    <Box component="section" id="projects" sx={{ py: 8, bgcolor: 'action.hover' }}>
-      <Container maxWidth="lg">
-        <Box sx={{ mb: 6 }}>
+    <Box 
+      component="section" 
+      id="projects" 
+      className="section-container"
+      sx={{ 
+        py: 10,
+        position: 'relative',
+        overflow: 'hidden',
+        transition: 'all 0.6s ease-in-out',
+        '&:hover': {
+          backgroundColor: theme => theme.palette.mode === 'dark' 
+            ? 'rgba(255,255,255,0.03)' 
+            : 'rgba(0,0,0,0.01)'
+        }
+      }}
+    >
+      <TechBackground 
+        variant="grid" 
+        opacity={0.08} 
+        animated={true}
+        rotateAnimation={true}
+        gradientFade={true}
+        gradientAngle={135}
+        hoverInteraction={false}
+        sx={{ 
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 0
+        }}
+      />
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+        <Box 
+          sx={{ 
+            mb: 6,
+            transition: 'all 0.4s ease',
+            '.section-container:hover &': {
+              transform: 'translateY(-5px)'
+            }
+          }}
+        >
           <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom>
-            Projects
+            Portfolio
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            Check out my most popular ROBLOX games and experiences
+            Check out my most popular ROBLOX games and experiences!
           </Typography>
         </Box>
         

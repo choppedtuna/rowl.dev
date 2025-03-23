@@ -3,6 +3,7 @@ import HeroSection from "@/components/hero-section"
 import ProjectsSection from "@/components/projects-section"
 import AccomplishmentsSection from "@/components/accomplishments-section"
 import ContactSection from "@/components/contact-section"
+import { Box } from "@mui/material"
 
 export const metadata: Metadata = {
   title: "Senior ROBLOX Programmer Portfolio",
@@ -11,13 +12,13 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
-      <main>
+    <Box className="min-h-screen bg-background" sx={{ overflow: 'hidden' }}>
+      <Box component="main">
         <HeroSection />
         <ProjectsSection />
         <AccomplishmentsSection />
         <ContactSection />
-      </main>
-    </div>
+      </Box>
+    </Box>
   )
 } 

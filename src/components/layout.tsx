@@ -26,8 +26,8 @@ export default function Layout({ children }: LayoutProps) {
   };
 
   const navItems = [
-    { text: 'Projects', href: '#projects' },
-    { text: 'Accomplishments', href: '#accomplishments' },
+    { text: 'Portfolio', href: '#projects' },
+    { text: 'Experience', href: '#accomplishments' },
     { text: 'Contact', href: '#contact' },
   ];
 

@@ -15,6 +15,7 @@ interface InlineHolographicImageProps {
   priority?: boolean;
   onMouseMove?: boolean; // Enable mouse movement interaction
   intensity?: number; // Control the intensity of the effect
+  showShine?: boolean; // Control visibility of shine effect
 }
 
 // The main container that handles masking
@@ -137,7 +138,8 @@ export default function InlineHolographicImage({
   style,
   priority = false,
   onMouseMove = false,
-  intensity = 0.85
+  intensity = 0.85,
+  showShine = false // Disabled by default
 }: InlineHolographicImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -240,13 +242,15 @@ export default function InlineHolographicImage({
       />
       
       {/* Shine effect - moving highlight */}
-      <ShineEffect 
-        src={src}
-        sx={{
-          zIndex: 4,
-          opacity: intensity * 0.8
-        }} 
-      />
+      {showShine && (
+        <ShineEffect 
+          src={src}
+          sx={{
+            zIndex: 4,
+            opacity: intensity * 0.8
+          }} 
+        />
+      )}
     </MaskedContainer>
   );
 } 

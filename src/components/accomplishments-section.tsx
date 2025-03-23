@@ -9,6 +9,7 @@ import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import PublicIcon from '@mui/icons-material/Public';
 import CodeIcon from '@mui/icons-material/Code';
+import TechBackground from './tech-background';
 
 interface AccomplishmentCardProps {
   title: string;
@@ -91,9 +92,47 @@ export default function AccomplishmentsSection() {
   ];
 
   return (
-    <Box component="section" id="accomplishments" sx={{ py: 8 }}>
-      <Container maxWidth="lg">
-        <Box sx={{ mb: 6 }}>
+    <Box 
+      component="section" 
+      id="accomplishments" 
+      className="section-container"
+      sx={{ 
+        py: 8,
+        position: 'relative',
+        overflow: 'hidden',
+        transition: 'all 0.5s ease-in-out',
+        '&:hover': {
+          transform: 'scale(1.005)'
+        }
+      }}
+    >
+      <TechBackground 
+        variant="dots" 
+        opacity={0.08} 
+        animated={true}
+        rotateAnimation={true}
+        gradientFade={true}
+        gradientAngle={45}
+        hoverInteraction={false}
+        sx={{ 
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 0
+        }}
+      />
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+        <Box 
+          sx={{ 
+            mb: 6,
+            transition: 'all 0.4s ease',
+            '.section-container:hover &': {
+              transform: 'translateY(-5px)'
+            }
+          }}
+        >
           <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom>
             Accomplishments
           </Typography>
@@ -102,7 +141,16 @@ export default function AccomplishmentsSection() {
           </Typography>
         </Box>
         
-        <Grid container spacing={3}>
+        <Grid 
+          container 
+          spacing={3}
+          sx={{
+            transition: 'all 0.5s ease',
+            '.section-container:hover &': {
+              transform: 'translateY(-2px)'
+            }
+          }}
+        >
           {accomplishments.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <AccomplishmentCard {...item} />

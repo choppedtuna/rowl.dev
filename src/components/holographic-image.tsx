@@ -62,6 +62,7 @@ interface HolographicImageProps {
   style?: React.CSSProperties;
   priority?: boolean;
   onMouseMove?: boolean; // Enable mouse movement interaction
+  showShine?: boolean; // Control visibility of shine effect
 }
 
 export default function HolographicImage({ 
@@ -72,7 +73,8 @@ export default function HolographicImage({
   className, 
   style,
   priority = false,
-  onMouseMove = false
+  onMouseMove = false,
+  showShine = false // Disabled by default
 }: HolographicImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -127,7 +129,7 @@ export default function HolographicImage({
         priority={priority}
       />
       <HolographicOverlay sx={dynamicStyle} />
-      <ShineEffect />
+      {showShine && <ShineEffect />}
     </Box>
   );
 } 
