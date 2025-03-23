@@ -131,7 +131,7 @@ export default function Layout({ children }: LayoutProps) {
         <Container maxWidth="lg">
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
             <Typography variant="body2" color="text.secondary">
-              © 2023 rowl.dev. All rights reserved.
+              © 2024 Eaglesong Ltd. All rights reserved.
             </Typography>
             <Box sx={{ display: 'flex', gap: 2 }}>
               <IconButton color="inherit" size="small">

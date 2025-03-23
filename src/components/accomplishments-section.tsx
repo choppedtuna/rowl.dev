@@ -113,6 +113,7 @@ export default function AccomplishmentsSection() {
         rotateAnimation={true}
         gradientFade={true}
         gradientAngle={45}
+        edgeFade={true}
         hoverInteraction={false}
         sx={{ 
           position: 'absolute',

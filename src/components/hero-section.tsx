@@ -28,6 +28,7 @@ export default function HeroSection() {
         rotateAnimation={true}
         gradientFade={true}
         gradientAngle={225}
+        edgeFade={true}
         hoverInteraction={false}
         sx={{ 
           position: 'absolute',

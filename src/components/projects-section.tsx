@@ -280,6 +280,7 @@ export default function ProjectsSection() {
         rotateAnimation={true}
         gradientFade={true}
         gradientAngle={135}
+        edgeFade={true}
         hoverInteraction={false}
         sx={{ 
           position: 'absolute',
