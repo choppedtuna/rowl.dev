@@ -1,13 +1,14 @@
+import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
+import { Providers } from './providers'
+import Layout from '@/components/layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ROBLOX Developer Portfolio',
-  description: 'Portfolio showcasing my ROBLOX development experience and games',
+  title: 'Senior ROBLOX Developer Portfolio',
+  description: 'Portfolio showcasing ROBLOX programming projects and skills',
 }
 
 export default function RootLayout({
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+        <Providers>
+          <Layout>
+            {children}
+          </Layout>
+        </Providers>
       </body>
     </html>
   )
