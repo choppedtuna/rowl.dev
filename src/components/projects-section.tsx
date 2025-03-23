@@ -150,6 +150,113 @@ function ProjectCard({ name, image, plays, rating, company, gameId, companyIcon,
   );
 }
 
+function HireMeCard() {
+  return (
+    <Card elevation={2} sx={{ 
+      height: '100%', 
+      display: 'flex', 
+      flexDirection: 'column',
+      transition: 'all 0.3s',
+      backgroundColor: 'background.paper',
+      position: 'relative',
+      overflow: 'hidden',
+      borderRadius: 2,
+      '&:hover': {
+        transform: 'translateY(-4px)',
+        boxShadow: theme => theme.palette.mode === 'dark' 
+          ? '0 14px 28px rgba(0,0,0,0.5), 0 10px 10px rgba(0,0,0,0.45)' 
+          : '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
+      }
+    }}>
+      <Box sx={{ position: 'relative', pt: '56.25%', overflow: 'hidden' }}> {/* 16:9 aspect ratio */}
+        <CardMedia
+          component="img"
+          image="/images/code-keyboard.jpg" // This is a placeholder, you'll need to add this image to your public/images folder
+          alt="Your Game Could Be Next"
+          sx={{ 
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            filter: theme => theme.palette.mode === 'dark' 
+              ? 'brightness(0.7) contrast(1.2)' 
+              : 'brightness(0.9)',
+          }}
+        />
+        <Box sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: theme => theme.palette.mode === 'dark'
+            ? 'linear-gradient(rgba(0,0,0,0.5), rgba(10,10,30,0.8))'
+            : 'linear-gradient(rgba(255,255,255,0.5), rgba(200,200,255,0.8))',
+          zIndex: 1
+        }}>
+          <Typography 
+            variant="h5" 
+            component="div" 
+            sx={{ 
+              color: 'text.primary', 
+              fontWeight: 'bold',
+              textAlign: 'center',
+              textShadow: theme => theme.palette.mode === 'dark'
+                ? '0 2px 4px rgba(0,0,0,0.5)'
+                : '0 2px 4px rgba(0,0,0,0.2)',
+              px: 2
+            }}
+          >
+            Your Vision, My Code
+          </Typography>
+        </Box>
+      </Box>
+      <CardContent sx={{ 
+        flexGrow: 1, 
+        display: 'flex', 
+        flexDirection: 'column',
+        position: 'relative',
+        zIndex: 1 
+      }}>
+        <Typography variant="h6" component="h3" gutterBottom fontWeight="bold" color="text.primary">
+          Your Game Could Be Next
+        </Typography>
+        
+        <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
+          Have a concept for the next hit ROBLOX game? Let's bring it to life together with professional development.
+        </Typography>
+        
+        <Box sx={{ flexGrow: 1 }} />
+        
+        <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+          <Chip 
+            icon={<StarIcon />} 
+            label="100% Dedication" 
+            size="small" 
+            variant="outlined"
+            color="primary"
+          />
+        </Stack>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          size="small" 
+          href="#contact"
+          fullWidth
+          sx={{ fontWeight: 'bold' }}
+        >
+          Let's Work Together
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function ProjectsSection() {
   const [games, setGames] = useState<RobloxGame[]>([]);
   const [loading, setLoading] = useState(true);
@@ -339,6 +446,11 @@ export default function ProjectsSection() {
               )}
             </Grid>
           ))}
+          
+          {/* Add the "Hire Me" card */}
+          <Grid item xs={12} sm={6} md={4}>
+            <HireMeCard />
+          </Grid>
         </Grid>
       </Container>
     </Box>

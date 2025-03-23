@@ -135,7 +135,7 @@ export default function AccomplishmentsSection() {
           }}
         >
           <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom>
-            Accomplishments
+            Achievements
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
             Key milestones and achievements from my ROBLOX development journey

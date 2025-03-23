@@ -1,10 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Box, Typography, Container, Paper, TextField, Button, Stack, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Typography, Container, Paper, TextField, Button, Stack, List, ListItem, ListItemIcon, ListItemText, Link as MuiLink } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import PersonIcon from '@mui/icons-material/Person';
 import SendIcon from '@mui/icons-material/Send';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import HolographicImage from './holographic-image';
 import InlineHolographicImage from './inline-holographic-image';
 import TechBackground from './tech-background';
@@ -50,99 +51,138 @@ export default function ContactSection() {
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Grid container spacing={6}>
           <Grid item xs={12} md={5}>
-            <Box 
+            <Paper 
+              elevation={3} 
               sx={{ 
+                p: 3, 
                 mb: 4,
+                borderRadius: 2,
+                backgroundColor: 'background.paper',
+                boxShadow: theme => `0 8px 24px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
+                position: 'relative',
+                zIndex: 2,
                 transition: 'all 0.4s ease',
-                '.section-container:hover &': {
-                  transform: 'translateY(-5px)'
-                }
-              }}
-            >
-              <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom>
-                Get in Touch
-              </Typography>
-              <Typography variant="body1" color="text.secondary" paragraph>
-                Have a project idea or want to collaborate? Fill out the form and I'll get back to you as soon as possible.
-              </Typography>
-            </Box>
-            
-            <List 
-              sx={{ 
-                mb: 4,
-                transition: 'all 0.5s ease',
-                '.section-container:hover &': {
-                  transform: 'translateY(-3px)'
-                }
-              }}
-            >
-              <Box sx={{ 
-                mb: 2, 
-                p: 2, 
-                borderRadius: 2, 
-                backgroundColor: 'background.paper', 
-                boxShadow: 3,
-                border: '1px solid rgba(255, 255, 255, 0.12)',
                 '&:hover': {
-                  boxShadow: 6,
-                  transform: 'translateY(-2px)',
-                  transition: 'all 0.2s'
+                  transform: 'translateY(-5px)',
+                  boxShadow: theme => `0 12px 28px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.15)'}`
                 }
-              }}>
-                <ListItem disableGutters sx={{ py: 1 }}>
-                  <ListItemIcon sx={{ minWidth: 48 }}>
-                    <InlineHolographicImage 
-                      src="/images/roblox-icon.png" 
-                      alt="Roblox"
-                      width={32}
-                      height={32}
-                      intensity={0.85}
-                    />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary="b_rowl" 
-                    primaryTypographyProps={{ 
-                      variant: 'body1',
-                      fontWeight: 500,
-                      fontSize: '1.1rem'
-                    }}
-                  />
-                </ListItem>
+              }}
+            >
+              <Box 
+                sx={{ 
+                  mb: 4,
+                  transition: 'all 0.4s ease'
+                }}
+              >
+                <Typography variant="h4" component="h2" fontWeight="bold" gutterBottom>
+                  Get in Touch
+                </Typography>
+                <Typography variant="body1" color="text.secondary" paragraph>
+                  Have a project idea or want to collaborate? Fill out the form and I'll get back to you as soon as possible.
+                </Typography>
               </Box>
               
-              <Box sx={{ 
-                p: 2, 
-                borderRadius: 2, 
-                backgroundColor: 'background.paper', 
-                boxShadow: 3,
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                '&:hover': {
-                  boxShadow: 6,
-                  transform: 'translateY(-2px)',
-                  transition: 'all 0.2s'
-                }
-              }}>
-                <ListItem disableGutters sx={{ py: 1 }}>
-                  <ListItemIcon sx={{ minWidth: 48 }}>
-                    <InlineHolographicImage 
-                      src="/images/email-icon.png" 
-                      alt="Email"
-                      width={32}
-                      height={32}
-                      intensity={0.85}
+              <List 
+                sx={{ 
+                  mb: 2,
+                  transition: 'all 0.5s ease'
+                }}
+              >
+                <Box sx={{ 
+                  mb: 2, 
+                  p: 2, 
+                  borderRadius: 2, 
+                  backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
+                  boxShadow: 1,
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  '&:hover': {
+                    boxShadow: 2,
+                    transform: 'translateY(-2px)',
+                    transition: 'all 0.2s'
+                  },
+                  cursor: 'pointer'
+                }}>
+                  <MuiLink 
+                    href="https://www.roblox.com/users/247354738/profile" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    color="inherit"
+                    underline="none"
+                    sx={{ display: 'block' }}
+                  >
+                    <ListItem 
+                      disableGutters 
+                      sx={{ 
+                        py: 1,
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <ListItemIcon sx={{ minWidth: 48 }}>
+                          <InlineHolographicImage 
+                            src="/images/roblox-icon.png" 
+                            alt="Roblox"
+                            width={32}
+                            height={32}
+                            intensity={0.85}
+                          />
+                        </ListItemIcon>
+                        <ListItemText 
+                          primary="b_rowl" 
+                          primaryTypographyProps={{ 
+                            variant: 'body1',
+                            fontWeight: 500,
+                            fontSize: '1.1rem'
+                          }}
+                        />
+                      </Box>
+                      <OpenInNewIcon 
+                        fontSize="small" 
+                        color="action" 
+                        sx={{ 
+                          opacity: 0.7,
+                          ml: 1
+                        }} 
+                      />
+                    </ListItem>
+                  </MuiLink>
+                </Box>
+                
+                <Box sx={{ 
+                  p: 2, 
+                  borderRadius: 2, 
+                  backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
+                  boxShadow: 1,
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  '&:hover': {
+                    boxShadow: 2,
+                    transform: 'translateY(-2px)',
+                    transition: 'all 0.2s'
+                  }
+                }}>
+                  <ListItem disableGutters sx={{ py: 1 }}>
+                    <ListItemIcon sx={{ minWidth: 48 }}>
+                      <InlineHolographicImage 
+                        src="/images/email-icon.png" 
+                        alt="Email"
+                        width={32}
+                        height={32}
+                        intensity={0.85}
+                      />
+                    </ListItemIcon>
+                    <ListItemText 
+                      primary="browlands99@gmail.com" 
+                      primaryTypographyProps={{ 
+                        variant: 'body1',
+                        fontWeight: 500,
+                        fontSize: '1.1rem'
+                      }}
                     />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary="browlands99@gmail.com" 
-                    primaryTypographyProps={{ 
-                      variant: 'body1',
-                      fontWeight: 500,
-                      fontSize: '1.1rem'
-                    }}
-                  />
-                </ListItem>
-              </Box>
-            </List>
+                  </ListItem>
+                </Box>
+              </List>
+            </Paper>
           </Grid>
           
           <Grid item xs={12} md={7}>
