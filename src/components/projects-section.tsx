@@ -1,10 +1,34 @@
 'use client';
 
-import React from 'react';
-import { Box, Typography, Container, Card, CardMedia, CardContent, Stack, Chip } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Container, Card, CardMedia, CardContent, Stack, Chip, CircularProgress, Button, Divider, Avatar } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import StarIcon from '@mui/icons-material/Star';
+import LaunchIcon from '@mui/icons-material/Launch';
+
+// Configure universe IDs here - easy to modify
+const PROJECTS_CONFIG = [
+  {
+    universeId: '2245518147',
+    company: 'Talewind Studio', // Example company name, easily modifiable
+    companyIcon: '/images/companies/talewind.webp', // Optional company icon path
+    companyWebsite: 'https://www.talewind.co.uk/' // Optional company website URL
+  },
+  // Add more projects as needed
+];
+
+interface RobloxGame {
+  id: string;
+  name: string;
+  description: string;
+  thumbnail: string;
+  visits: number;
+  favoritedCount: number;
+  company: string;
+  companyIcon?: string;
+  companyWebsite?: string;
+}
 
 interface ProjectCardProps {
   title: string;
@@ -12,9 +36,18 @@ interface ProjectCardProps {
   image: string;
   plays: string;
   rating: string;
+  company: string;
+  universeId: string;
+  companyIcon?: string;
+  companyWebsite?: string;
 }
 
-function ProjectCard({ title, description, image, plays, rating }: ProjectCardProps) {
+function ProjectCard({ title, description, image, plays, rating, company, universeId, companyIcon, companyWebsite }: ProjectCardProps) {
+  // Truncate description to 150 characters and add ellipsis if needed
+  const truncatedDescription = description.length > 150 
+    ? description.substring(0, 150).trim() + '...'
+    : description;
+
   return (
     <Card elevation={2} sx={{ 
       height: '100%', 
@@ -44,10 +77,47 @@ function ProjectCard({ title, description, image, plays, rating }: ProjectCardPr
         <Typography variant="h6" component="h3" gutterBottom fontWeight="bold">
           {title}
         </Typography>
+        
+        <Box 
+          component={companyWebsite ? "a" : "div"}
+          href={companyWebsite}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ 
+            display: 'inline-block',
+            mb: 1.5,
+            bgcolor: 'action.hover',
+            borderRadius: 1,
+            px: 1.5,
+            py: 0.75,
+            textDecoration: 'none',
+            transition: 'background-color 0.2s',
+            cursor: companyWebsite ? 'pointer' : 'default',
+            '&:hover': {
+              bgcolor: companyWebsite ? 'action.selected' : 'action.hover'
+            }
+          }}
+        >
+          <Stack direction="row" spacing={1} alignItems="center">
+            {companyIcon && (
+              <Avatar 
+                src={companyIcon} 
+                alt={company}
+                sx={{ width: 20, height: 20 }}
+              />
+            )}
+            <Typography variant="body2" color="text.secondary">
+              at {company}
+            </Typography>
+          </Stack>
+        </Box>
+        
+        <Divider sx={{ mb: 1.5 }} />
+        
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
-          {description}
+          {truncatedDescription}
         </Typography>
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
           <Chip 
             icon={<PeopleIcon />} 
             label={plays} 
@@ -61,33 +131,125 @@ function ProjectCard({ title, description, image, plays, rating }: ProjectCardPr
             variant="outlined" 
           />
         </Stack>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          size="small" 
+          endIcon={<LaunchIcon />}
+          href={`https://www.roblox.com/games/${universeId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          fullWidth
+        >
+          View on ROBLOX
+        </Button>
       </CardContent>
     </Card>
   );
 }
 
 export default function ProjectsSection() {
-  const projects = [
+  const [games, setGames] = useState<RobloxGame[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchRobloxData() {
+      try {
+        setLoading(true);
+        
+        const fetchedGames = await Promise.all(
+          PROJECTS_CONFIG.map(async (project) => {
+            // Use our API route instead of directly calling Roblox API
+            const response = await fetch(`/api/roblox/games?universeIds=${project.universeId}`);
+            
+            if (!response.ok) {
+              throw new Error(`API request failed with status ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Check if we have valid data
+            if (data.details?.data && data.details.data.length > 0 && data.thumbnails?.data) {
+              const game = data.details.data[0];
+              const thumbnail = data.thumbnails.data[0];
+              
+              return {
+                id: project.universeId,
+                name: game.name,
+                description: game.description || "No description available",
+                thumbnail: thumbnail?.imageUrl || "/placeholder.jpg",
+                visits: game.visits || 0,
+                favoritedCount: game.favoritedCount || 0,
+                company: project.company,
+                companyIcon: project.companyIcon,
+                companyWebsite: project.companyWebsite
+              };
+            }
+            return null;
+          })
+        );
+        
+        setGames(fetchedGames.filter(game => game !== null) as RobloxGame[]);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching Roblox data:", err);
+        setError("Failed to load projects data");
+        setLoading(false);
+      }
+    }
+    
+    fetchRobloxData();
+  }, []);
+
+  // Format number with suffix (K, M, B)
+  const formatNumber = (num: number): string => {
+    if (num >= 1000000000) {
+      return (num / 1000000000).toFixed(1) + 'B+';
+    }
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M+';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K+';
+    }
+    return num.toString();
+  };
+
+  // Fallback data in case API fails
+  const fallbackProjects = [
     {
       title: "Zombie Survival",
       description: "A thrilling survival game where players must defend against waves of zombies",
       image: "/game1.jpg",
       plays: "2.5M+ Plays",
-      rating: "95% Rating"
+      rating: "95% Rating",
+      company: "Survival Games Inc.",
+      universeId: "12345",
+      companyIcon: "/company-default.png",
+      companyWebsite: "https://example.com/survival-games"
     },
     {
       title: "Tycoon Adventure",
       description: "Build and manage your own empire in this addictive tycoon simulator",
       image: "/game2.jpg",
       plays: "3.8M+ Plays",
-      rating: "92% Rating"
+      rating: "92% Rating",
+      company: "Tycoon Masters",
+      universeId: "23456",
+      companyIcon: "/company-default.png",
+      companyWebsite: "https://example.com/tycoon-masters"
     },
     {
       title: "Racing Simulator",
       description: "Race against friends and competitors in high-speed action",
       image: "/game3.jpg",
       plays: "1.7M+ Plays",
-      rating: "89% Rating"
+      rating: "89% Rating",
+      company: "Speed Studios",
+      universeId: "34567",
+      companyIcon: "/company-default.png",
+      companyWebsite: "https://example.com/speed-studios"
     }
   ];
 
@@ -103,10 +265,34 @@ export default function ProjectsSection() {
           </Typography>
         </Box>
         
+        {loading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+            <CircularProgress />
+          </Box>
+        ) : error ? (
+          <Typography color="error" sx={{ textAlign: 'center' }}>
+            {error} - Showing fallback data instead
+          </Typography>
+        ) : null}
+        
         <Grid container spacing={4}>
-          {projects.map((project, index) => (
+          {(games.length > 0 ? games : fallbackProjects).map((project, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <ProjectCard {...project} />
+              {'id' in project ? (
+                <ProjectCard 
+                  title={project.name}
+                  description={project.description}
+                  image={project.thumbnail}
+                  plays={`${formatNumber(project.visits)} Plays`}
+                  rating={`${formatNumber(project.favoritedCount)} Favorites`}
+                  company={project.company}
+                  universeId={project.id}
+                  companyIcon={project.companyIcon}
+                  companyWebsite={project.companyWebsite}
+                />
+              ) : (
+                <ProjectCard {...(project as any)} />
+              )}
             </Grid>
           ))}
         </Grid>
