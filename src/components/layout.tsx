@@ -8,6 +8,8 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme as useNextTheme } from 'next-themes';
+import HolographicImage from './holographic-image';
+import InlineHolographicImage from './inline-holographic-image';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -53,7 +55,15 @@ export default function Layout({ children }: LayoutProps) {
         <Container maxWidth="lg">
           <Toolbar disableGutters>
             <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
-              <Image src="/images/roblox-icon.png" alt="ROBLOX Logo" width={32} height={32} style={{ borderRadius: '4px' }} />
+              <InlineHolographicImage 
+                src="/images/roblox-icon.png" 
+                alt="ROBLOX Logo" 
+                width={32} 
+                height={32} 
+                style={{ borderRadius: '4px' }}
+                onMouseMove={true}
+                intensity={0.8}
+              />
               {!isMobile && (
                 <Typography variant="h6" component="div" sx={{ ml: 1, fontWeight: 'bold' }}>
                   rowl.dev
@@ -124,9 +134,6 @@ export default function Layout({ children }: LayoutProps) {
               © 2023 rowl.dev. All rights reserved.
             </Typography>
             <Box sx={{ display: 'flex', gap: 2 }}>
-              <IconButton color="inherit" size="small">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
-              </IconButton>
               <IconButton color="inherit" size="small">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
               </IconButton>

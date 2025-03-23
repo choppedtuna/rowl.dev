@@ -4,9 +4,9 @@ import React from 'react';
 import { Box, Typography, Container, Paper, TextField, Button, Stack, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import SendIcon from '@mui/icons-material/Send';
+import HolographicImage from './holographic-image';
+import InlineHolographicImage from './inline-holographic-image';
 
 export default function ContactSection() {
   return (
@@ -26,32 +26,31 @@ export default function ContactSection() {
             <List sx={{ mb: 4 }}>
               <ListItem disableGutters>
                 <ListItemIcon sx={{ minWidth: 40 }}>
-                  <Box component="img" 
+                  <InlineHolographicImage 
                     src="/images/roblox-icon.png" 
                     alt="Roblox"
-                    sx={{ width: 24, height: 24 }}
+                    width={24}
+                    height={24}
+                    intensity={0.85}
                   />
                 </ListItemIcon>
                 <ListItemText 
-                  primary="ROBLOX: @yourusername" 
+                  primary="@b_rowl" 
                   primaryTypographyProps={{ variant: 'body2' }}
                 />
               </ListItem>
               <ListItem disableGutters>
                 <ListItemIcon sx={{ minWidth: 40 }}>
-                  <EmailIcon color="primary" />
+                  <InlineHolographicImage 
+                    src="/images/email-icon.png" 
+                    alt="Email"
+                    width={24}
+                    height={24}
+                    intensity={0.85}
+                  />
                 </ListItemIcon>
                 <ListItemText 
-                  primary="email@example.com" 
-                  primaryTypographyProps={{ variant: 'body2' }}
-                />
-              </ListItem>
-              <ListItem disableGutters>
-                <ListItemIcon sx={{ minWidth: 40 }}>
-                  <TwitterIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText 
-                  primary="Twitter: @yourusername" 
+                  primary="browlands99@gmail.com" 
                   primaryTypographyProps={{ variant: 'body2' }}
                 />
               </ListItem>

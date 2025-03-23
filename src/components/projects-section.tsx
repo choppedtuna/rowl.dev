@@ -9,19 +9,28 @@ import LaunchIcon from '@mui/icons-material/Launch';
 
 // Configure universe IDs here - easy to modify
 const PROJECTS_CONFIG = [
+	// Chicken Life
   {
-    universeId: '2245518147',
-    company: 'Talewind Studio', // Example company name, easily modifiable
-    companyIcon: '/images/companies/talewind.webp', // Optional company icon path
-    companyWebsite: 'https://www.talewind.co.uk/' // Optional company website URL
+    gameId: '6149941304',
+    name: 'Chicken Life',
+    company: 'Talewind Studio',
+    companyIcon: '/images/companies/talewind.webp',
+    companyWebsite: 'https://www.talewind.co.uk/',
   },
-  // Add more projects as needed
+  {
+	gameId: '15432848623',
+	name: 'Netflix NextWorld',
+	company: 'Buoy Studio',
+	companyIcon: '/images/companies/buoy.png',
+	companyWebsite: 'https://www.buoy.studio/',
+  }
 ];
 
 interface RobloxGame {
   id: string;
-  name: string;
-  description: string;
+  gameId: string;
+  name: string; // This can be a custom name from config or API name
+  description: string; // Kept for backward compatibility but not displayed
   thumbnail: string;
   visits: number;
   favoritedCount: number;
@@ -31,23 +40,18 @@ interface RobloxGame {
 }
 
 interface ProjectCardProps {
-  title: string;
-  description: string;
+  name: string;
+  description?: string;
   image: string;
   plays: string;
   rating: string;
   company: string;
-  universeId: string;
+  gameId: string;
   companyIcon?: string;
   companyWebsite?: string;
 }
 
-function ProjectCard({ title, description, image, plays, rating, company, universeId, companyIcon, companyWebsite }: ProjectCardProps) {
-  // Truncate description to 150 characters and add ellipsis if needed
-  const truncatedDescription = description.length > 150 
-    ? description.substring(0, 150).trim() + '...'
-    : description;
-
+function ProjectCard({ name, image, plays, rating, company, gameId, companyIcon, companyWebsite }: ProjectCardProps) {
   return (
     <Card elevation={2} sx={{ 
       height: '100%', 
@@ -62,7 +66,7 @@ function ProjectCard({ title, description, image, plays, rating, company, univer
         <CardMedia
           component="img"
           image={image}
-          alt={title}
+          alt={name}
           sx={{ 
             position: 'absolute',
             top: 0,
@@ -75,7 +79,7 @@ function ProjectCard({ title, description, image, plays, rating, company, univer
       </Box>
       <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <Typography variant="h6" component="h3" gutterBottom fontWeight="bold">
-          {title}
+          {name}
         </Typography>
         
         <Box 
@@ -114,10 +118,7 @@ function ProjectCard({ title, description, image, plays, rating, company, univer
         
         <Divider sx={{ mb: 1.5 }} />
         
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
-          {truncatedDescription}
-        </Typography>
-        <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+        <Stack direction="row" spacing={2} sx={{ mb: 2, mt: 2, flexGrow: 1 }}>
           <Chip 
             icon={<PeopleIcon />} 
             label={plays} 
@@ -136,7 +137,7 @@ function ProjectCard({ title, description, image, plays, rating, company, univer
           color="primary" 
           size="small" 
           endIcon={<LaunchIcon />}
-          href={`https://www.roblox.com/games/${universeId}`}
+          href={`https://www.roblox.com/games/${gameId}`}
           target="_blank"
           rel="noopener noreferrer"
           fullWidth
@@ -161,7 +162,7 @@ export default function ProjectsSection() {
         const fetchedGames = await Promise.all(
           PROJECTS_CONFIG.map(async (project) => {
             // Use our API route instead of directly calling Roblox API
-            const response = await fetch(`/api/roblox/games?universeIds=${project.universeId}`);
+            const response = await fetch(`/api/roblox/games?gameIds=${project.gameId}`);
             
             if (!response.ok) {
               throw new Error(`API request failed with status ${response.status}`);
@@ -175,9 +176,10 @@ export default function ProjectsSection() {
               const thumbnail = data.thumbnails.data[0];
               
               return {
-                id: project.universeId,
-                name: game.name,
-                description: game.description || "No description available",
+                id: game.id,
+                gameId: project.gameId,
+                name: project.name || game.name, // Use custom name if provided, fall back to API name
+                description: "No description available", // Not used, but needed for interface compliance
                 thumbnail: thumbnail?.imageUrl || "/placeholder.jpg",
                 visits: game.visits || 0,
                 favoritedCount: game.favoritedCount || 0,
@@ -219,35 +221,35 @@ export default function ProjectsSection() {
   // Fallback data in case API fails
   const fallbackProjects = [
     {
-      title: "Zombie Survival",
-      description: "A thrilling survival game where players must defend against waves of zombies",
+      name: "Zombie Survival",
+      description: "A thrilling survival game where players must defend against waves of zombies. I contributed to game mechanics and AI systems.",
       image: "/game1.jpg",
       plays: "2.5M+ Plays",
       rating: "95% Rating",
       company: "Survival Games Inc.",
-      universeId: "12345",
+      gameId: "12345",
       companyIcon: "/company-default.png",
       companyWebsite: "https://example.com/survival-games"
     },
     {
-      title: "Tycoon Adventure",
-      description: "Build and manage your own empire in this addictive tycoon simulator",
+      name: "Tycoon Adventure",
+      description: "Build and manage your own empire in this addictive tycoon simulator. I designed the economic systems and progression mechanics.",
       image: "/game2.jpg",
       plays: "3.8M+ Plays",
       rating: "92% Rating",
       company: "Tycoon Masters",
-      universeId: "23456",
+      gameId: "23456",
       companyIcon: "/company-default.png",
       companyWebsite: "https://example.com/tycoon-masters"
     },
     {
-      title: "Racing Simulator",
-      description: "Race against friends and competitors in high-speed action",
+      name: "Racing Simulator",
+      description: "Race against friends and competitors in high-speed action. I implemented the physics system and vehicle customization features.",
       image: "/game3.jpg",
       plays: "1.7M+ Plays",
       rating: "89% Rating",
       company: "Speed Studios",
-      universeId: "34567",
+      gameId: "34567",
       companyIcon: "/company-default.png",
       companyWebsite: "https://example.com/speed-studios"
     }
@@ -280,13 +282,13 @@ export default function ProjectsSection() {
             <Grid item xs={12} sm={6} md={4} key={index}>
               {'id' in project ? (
                 <ProjectCard 
-                  title={project.name}
+                  name={project.name}
                   description={project.description}
                   image={project.thumbnail}
                   plays={`${formatNumber(project.visits)} Plays`}
                   rating={`${formatNumber(project.favoritedCount)} Favorites`}
                   company={project.company}
-                  universeId={project.id}
+                  gameId={project.gameId}
                   companyIcon={project.companyIcon}
                   companyWebsite={project.companyWebsite}
                 />
