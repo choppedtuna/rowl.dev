@@ -1,6 +1,7 @@
 'use client';
 
 import { Box, Typography, Button, Container, Stack, Avatar } from '@mui/material';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 import Image from 'next/image';
 import TechBackground from './tech-background';
@@ -138,11 +139,19 @@ export default function HeroSection() {
                 }
               }}
             >
+              <LocationOnIcon 
+                fontSize="small" 
+                color="action" 
+                sx={{ 
+                  fontSize: 20,
+                  opacity: 0.7
+                }}
+              />
               <Typography 
                 variant="subtitle1" 
                 color="text.secondary"
               >
-                🏴󠁧󠁢󠁷󠁬󠁳󠁿 Cardiff, UK
+                Cardiff, UK
               </Typography>
             </Stack>
             
