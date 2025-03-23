@@ -61,12 +61,9 @@ export default function ContactSection() {
                 boxShadow: theme => `0 8px 24px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
                 position: 'relative',
                 zIndex: 2,
-                transition: 'transform 0.4s ease',
-                willChange: 'transform, box-shadow',
-                transform: 'translate3d(0, 0, 0)',
+                transition: 'box-shadow 0.4s ease',
                 minHeight: {xs: 'auto', md: '320px'},
                 '&:hover': {
-                  transform: 'translate3d(0, -5px, 0)',
                   boxShadow: theme => `0 12px 28px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.15)'}`
                 }
               }}
@@ -99,12 +96,9 @@ export default function ContactSection() {
                   backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
                   boxShadow: 1,
                   border: '1px solid rgba(255, 255, 255, 0.12)',
-                  willChange: 'transform, box-shadow',
-                  transform: 'translate3d(0, 0, 0)',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  transition: 'box-shadow 0.2s',
                   '&:hover': {
-                    boxShadow: 2,
-                    transform: 'translate3d(0, -2px, 0)'
+                    boxShadow: 2
                   },
                   cursor: 'pointer'
                 }}>
@@ -178,12 +172,9 @@ export default function ContactSection() {
                   backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
                   boxShadow: 1,
                   border: '1px solid rgba(255, 255, 255, 0.12)',
-                  willChange: 'transform, box-shadow',
-                  transform: 'translate3d(0, 0, 0)',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  transition: 'box-shadow 0.2s',
                   '&:hover': {
-                    boxShadow: 2,
-                    transform: 'translate3d(0, -2px, 0)'
+                    boxShadow: 2
                   },
                   cursor: 'pointer'
                 }}>
@@ -256,12 +247,9 @@ export default function ContactSection() {
                   backgroundColor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)', 
                   boxShadow: 1,
                   border: '1px solid rgba(255, 255, 255, 0.12)',
-                  willChange: 'transform, box-shadow',
-                  transform: 'translate3d(0, 0, 0)',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  transition: 'box-shadow 0.2s',
                   '&:hover': {
-                    boxShadow: 2,
-                    transform: 'translate3d(0, -2px, 0)'
+                    boxShadow: 2
                   }
                 }}>
                   <ListItem disableGutters sx={{ py: 1 }}>

@@ -71,9 +71,9 @@ function ProjectCard({ name, image, plays, rating, company, gameId, companyIcon,
       height: '100%', 
       display: 'flex', 
       flexDirection: 'column',
-      transition: 'transform 0.3s',
+      transition: 'box-shadow 0.3s',
       '&:hover': {
-        transform: 'translateY(-4px)'
+        boxShadow: 4
       }
     }}>
       <Box sx={{ position: 'relative', pt: '56.25%' }}> {/* 16:9 aspect ratio */}
@@ -223,13 +223,12 @@ function HireMeCard() {
       height: '100%', 
       display: 'flex', 
       flexDirection: 'column',
-      transition: 'all 0.3s',
+      transition: 'box-shadow 0.3s',
       backgroundColor: 'background.paper',
       position: 'relative',
       overflow: 'hidden',
       borderRadius: 2,
       '&:hover': {
-        transform: 'translateY(-4px)',
         boxShadow: theme => theme.palette.mode === 'dark' 
           ? '0 14px 28px rgba(0,0,0,0.5), 0 10px 10px rgba(0,0,0,0.45)' 
           : '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
@@ -650,9 +649,8 @@ export default function ProjectsSection() {
               borderRadius: '14px',
               background: theme => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)',
               boxShadow: theme => theme.palette.mode === 'dark' ? '0 4px 20px rgba(0,0,0,0.2)' : '0 4px 20px rgba(0,0,0,0.05)',
-              transition: 'all 0.4s ease',
+              transition: 'box-shadow 0.4s ease',
               '&:hover': {
-                transform: 'translateY(-4px)',
                 boxShadow: theme => theme.palette.mode === 'dark' ? '0 8px 30px rgba(0,0,0,0.3)' : '0 8px 30px rgba(0,0,0,0.1)',
               }
             }}
