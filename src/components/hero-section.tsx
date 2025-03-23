@@ -125,6 +125,27 @@ export default function HeroSection() {
               Ben Rowlands
             </Typography>
             
+            <Stack 
+              direction="row" 
+              spacing={1} 
+              alignItems="center" 
+              justifyContent="center"
+              mb={2}
+              sx={{
+                transition: 'all 0.3s ease',
+                '.section-container:hover &': {
+                  transform: 'translateY(-2px)'
+                }
+              }}
+            >
+              <Typography 
+                variant="subtitle1" 
+                color="text.secondary"
+              >
+                🏴󠁧󠁢󠁷󠁬󠁳󠁿 Cardiff, UK
+              </Typography>
+            </Stack>
+            
             <Typography 
               variant="h5" 
               color="text.secondary" 
@@ -137,7 +158,7 @@ export default function HeroSection() {
                 }
               }}
             >
-              Creating immersive experiences and engaging gameplay for millions of players on the ROBLOX platform
+              With over 10 years of experience creating immersive experiences and engaging gameplay for millions of players on the ROBLOX platform
             </Typography>
             
             <Stack 
