@@ -104,10 +104,7 @@ export default function AccomplishmentsSection() {
         overflow: 'hidden',
         transition: 'transform 0.5s ease-in-out',
         willChange: 'transform',
-        transform: 'translate3d(0, 0, 0)',
-        '&:hover': {
-          transform: 'translate3d(0, 0, 0) scale(1.005)'
-        }
+        transform: 'translate3d(0, 0, 0)'
       }}
     >
       <TechBackground 

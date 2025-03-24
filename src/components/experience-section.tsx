@@ -103,10 +103,7 @@ export default function ExperienceSection({ config = {} }: ExperienceSectionProp
         overflow: 'hidden',
         transition: animate ? 'transform 0.5s ease-in-out' : 'none',
         willChange: animate ? 'transform' : 'auto',
-        transform: 'translate3d(0, 0, 0)',
-        '&:hover': animate ? {
-          transform: 'translate3d(0, 0, 0) scale(1.005)'
-        } : {}
+        transform: 'translate3d(0, 0, 0)'
       }}
     >
       <TechBackground 

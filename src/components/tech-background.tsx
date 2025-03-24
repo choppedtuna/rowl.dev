@@ -57,8 +57,8 @@ export default function TechBackground({
     const currentAngle = gradientAngle || angle;
     if (edgeFade) {
       return {
-        maskImage: `radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,${opacity * 1.5}) 80%, transparent 100%)`,
-        WebkitMaskImage: `radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,${opacity * 1.5}) 80%, transparent 100%)`,
+        maskImage: `radial-gradient(circle at center, rgba(0,0,0,1) 10%, rgba(0,0,0,0.2) 40%, transparent 70%)`,
+        WebkitMaskImage: `radial-gradient(circle at center, rgba(0,0,0,1) 10%, rgba(0,0,0,0.2) 40%, transparent 70%)`,
       };
     }
     return {

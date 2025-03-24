@@ -16,11 +16,7 @@ export default function HeroSection() {
         position: 'relative',
         overflow: 'hidden',
         transition: 'background-color 0.5s ease-in-out',
-        '&:hover': {
-          backgroundColor: theme => theme.palette.mode === 'dark' 
-            ? 'rgba(255,255,255,0.02)' 
-            : 'rgba(0,0,0,0.01)'
-        }
+        mb: 2
       }}
     >
       <TechBackground 

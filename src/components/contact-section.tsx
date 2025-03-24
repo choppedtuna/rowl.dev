@@ -3,11 +3,9 @@
 import React from 'react';
 import { Box, Typography, Container, Paper, TextField, Button, Stack, List, ListItem, ListItemIcon, ListItemText, Link as MuiLink } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import PersonIcon from '@mui/icons-material/Person';
 import SendIcon from '@mui/icons-material/Send';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Image from 'next/image';
-import HolographicImage from './holographic-image';
 import TechBackground from './tech-background';
 
 export default function ContactSection() {
@@ -21,13 +19,7 @@ export default function ContactSection() {
         bgcolor: 'action.hover',
         position: 'relative',
         overflow: 'hidden',
-        transition: 'all 0.6s ease-in-out',
-        '&:hover': {
-          bgcolor: theme => 
-            theme.palette.mode === 'dark' 
-              ? 'rgba(255,255,255,0.05)' 
-              : theme.palette.action.selected
-        }
+        transition: 'all 0.6s ease-in-out'
       }}
     >
       <TechBackground 
