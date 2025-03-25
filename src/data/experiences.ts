@@ -49,7 +49,7 @@ const experiences: Experience[] = [
   {
     title: "Senior Game Developer",
     organization: "Talewind Studio",
-    period: "2016 - 2019",
+    period: "2022 - 2023",
     description: "Developed a GitHub release pipeline & APIs for social media integration on 'Chicken Life'. Managed feature releases. Provided mentorship to Junior Developers",
     skills: ["Lua", "Game Design", "UI/UX", "Performance Optimization", "API Development"],
     icon: React.createElement(GraduationCap, { className: "w-5 h-5 text-zinc-300" })
@@ -57,7 +57,7 @@ const experiences: Experience[] = [
   {
     title: "Software Engineer",
     organization: "Aforza",
-    period: "Summer 2018",
+    period: "2021 - 2022",
     description: "Created API solutions for B2B clients on Google Cloud Platform. Optimised all solutions using Redis caching to ensure high availability and scalability",
 	skills: ["Node.js", "Typescript","Google Cloud Platform", "Redis", "API Development"],
     icon: React.createElement(Building, { className: "w-5 h-5 text-zinc-300" })

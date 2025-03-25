@@ -298,7 +298,7 @@ export default function ProjectsSection() {
     <section id="projects" className="py-8 pt-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6">
-          <SectionTitle title="Projects" subtitle="A selection of my most significant game development work" centered={true} />
+          <SectionTitle title="Projects" subtitle="MY TOP HITS" centered={true} />
         </div>
         
         {isLoading ? (
