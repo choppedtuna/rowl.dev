@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Image, FileText, Mail, Linkedin, Github, User, Contact, Code } from "lucide-react";
+import { Home, User, Contact, Code, Linkedin, Github } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 export default function Header() {

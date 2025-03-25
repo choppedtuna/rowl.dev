@@ -58,7 +58,7 @@ export default function ContactSection() {
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     // In a real implementation, you would send the form data to your backend
-    console.log('Form submitted:', formData);
+    // console.log('Form submitted:', formData);
     
     setIsSubmitting(false);
     setSubmitSuccess(true);

@@ -9,12 +9,9 @@ import experiences from "@/data/experiences";
 
 // Tech stack icons
 import { 
-  SiHtml5, SiCss3, SiJavascript, SiTypescript, SiReact, 
-  SiNextdotjs, SiTailwindcss, SiFramer, SiNodedotjs, 
-  SiExpress, SiMongodb, SiRedux, SiGit, SiGithub,
-  SiVercel, SiPostman, SiCplusplus, SiFigma,
-  SiLua,
-  SiRedis
+  SiTypescript, SiNodedotjs, 
+  SiExpress, SiGit, SiGithub,
+  SiFigma, SiLua, SiRedis
 } from "react-icons/si";
 
 export default function AboutSection() {
@@ -52,7 +49,6 @@ export default function AboutSection() {
     { icon: <SiGithub className="h-5 w-5" />, name: "GitHub" },
     { icon: <SiExpress className="h-5 w-5" />, name: "ExpressJS" },
     { icon: <SiRedis className="h-5 w-5 text-purple-600" />, name: "Redis" },
-    { icon: <SiPostman className="h-5 w-5 text-orange-500" />, name: "Postman" },
     { icon: <SiFigma className="h-5 w-5 text-purple-400" />, name: "Figma" },
   ];
 
