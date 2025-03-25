@@ -1,76 +1,120 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
- 
-@layer base {
-  :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --radius: 0.5rem;
-  }
- 
-  .light {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-  }
+@import "tailwindcss";
 
-  /* Add smooth scrolling behavior */
-  html {
-    scroll-behavior: smooth;
-    height: 100%;
-  }
-  
-  body {
-    height: 100%;
-    overflow-x: hidden;
-  }
-  
-  /* Additional styles for scroll sections */
-  .scroll-section {
-    min-height: 100vh; /* Ensure sections take up at least full viewport height */
-    perspective: 1000px; /* Add perspective for 3D effects */
+/* Import Nanami Pro font */
+@font-face {
+  font-family: 'Nanami Pro';
+  src: url('/fonts/NanamiPro-Thin.woff2') format('woff2'),
+       url('/fonts/NanamiPro-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nanami Pro';
+  src: url('/fonts/NanamiPro-Light.woff2') format('woff2'),
+       url('/fonts/NanamiPro-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nanami Pro';
+  src: url('/fonts/NanamiPro-Regular.woff2') format('woff2'),
+       url('/fonts/NanamiPro-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nanami Pro';
+  src: url('/fonts/NanamiPro-Bold.woff2') format('woff2'),
+       url('/fonts/NanamiPro-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --font-nanami: 'Nanami Pro', sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-nanami);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ededed;
   }
 }
- 
-@layer base {
-  * {
-    @apply border-border;
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-nanami);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll margin for anchor links to account for fixed header */
+section[id] {
+  scroll-margin-top: 100px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #262626;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Add gradient animation */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
-  body {
-    @apply bg-background text-foreground;
+  50% {
+    background-position: 100% 50%;
   }
-} 
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 2s linear infinite;
+  background-size: 200% 200% !important;
+}
+
+.animate-gradient-slow {
+  animation: gradient 15s ease infinite;
+  background-size: 300% 300% !important;
+}
+
+.animate-gradient-continuous {
+  background-size: 400% auto !important;
+  animation: gradient 8s ease-in-out infinite;
+}

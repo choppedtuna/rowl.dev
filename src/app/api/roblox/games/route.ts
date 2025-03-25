@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 // Simple in-memory cache with expiration
 const cache = new Map();
-const CACHE_TTL = 3600000; // 1 hour cache time
+const CACHE_TTL = 30; // 1 hour cache time
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
