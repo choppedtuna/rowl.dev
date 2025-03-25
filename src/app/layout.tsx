@@ -3,8 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "My professional portfolio",
+  title: "rowl.dev (Portfolio)",
+  description: "My professional ROBLOX portfolio",
 };
 
 export default function RootLayout({
