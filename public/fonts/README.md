@@ -1,30 +1,25 @@
-# Nanami Pro Font
+# Font Information
 
-The website is configured to use the Nanami Pro font family.
+The website now uses the Lexend Deca font family from Google Fonts.
 
-## Font Files Needed
+## Font Usage
 
-Place the following font files in this directory:
+Lexend Deca is loaded directly from Google Fonts using the following import:
+```css
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;700&display=swap');
+```
 
-- NanamiPro-Thin.woff2
-- NanamiPro-Thin.woff
-- NanamiPro-Light.woff2
-- NanamiPro-Light.woff
-- NanamiPro-Regular.woff2
-- NanamiPro-Regular.woff
-- NanamiPro-Bold.woff2
-- NanamiPro-Bold.woff
+## Weights Used
 
-## How to Obtain
+- 100: Extra Light (used for section titles)
+- 300: Light
+- 400: Regular (used for regular content)
+- 700: Bold (used for the hero section)
 
-Nanami Pro is a premium font and may need to be purchased from a type foundry or font distributor. After obtaining the font files, place them in this directory to enable the correct typography throughout the website.
+## About Lexend Deca
 
-## Usage in the Website
-
-- The hero section uses the Bold weight
-- Section titles use the Thin weight
-- Regular content uses the Regular weight
+Lexend Deca is an open-source font designed for maximum legibility. It was specifically created to reduce visual stress and improve reading proficiency.
 
 ## Fallback
 
-If the font files are not available, the website will fall back to the system sans-serif font. 
+If Google Fonts is not available, the website will fall back to the system sans-serif font. 

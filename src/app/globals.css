@@ -1,46 +1,9 @@
 @import "tailwindcss";
 
-/* Import Nanami Pro font */
-@font-face {
-  font-family: 'Nanami Pro';
-  src: url('/fonts/NanamiPro-Thin.woff2') format('woff2'),
-       url('/fonts/NanamiPro-Thin.woff') format('woff');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Nanami Pro';
-  src: url('/fonts/NanamiPro-Light.woff2') format('woff2'),
-       url('/fonts/NanamiPro-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Nanami Pro';
-  src: url('/fonts/NanamiPro-Regular.woff2') format('woff2'),
-       url('/fonts/NanamiPro-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Nanami Pro';
-  src: url('/fonts/NanamiPro-Bold.woff2') format('woff2'),
-       url('/fonts/NanamiPro-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --background: #000000;
   --foreground: #ffffff;
-  --font-nanami: 'Nanami Pro', sans-serif;
+  --font-nanami: 'Lexend Deca', sans-serif;
 }
 
 @theme inline {

@@ -54,7 +54,7 @@ export default {
         },
       },
       fontFamily: {
-        'nanami': ['Nanami Pro', 'sans-serif'],
+        'nanami': ['Lexend Deca', 'sans-serif'],
       },
       fontWeight: {
         thin: 100,

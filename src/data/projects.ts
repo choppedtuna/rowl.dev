@@ -23,7 +23,8 @@ const projects: Project[] = [
     keyStats: [
       'Increased Spend by 20x through improved Shop surfacing & content updates',
       'Created a comprehensive building system',
-      'Peak of 10K concurrent players'
+      'Peak of 10K concurrent players',
+	  'Selected for \'Featured Titles\' after full re-launch'
     ],
   },
   {
@@ -47,7 +48,7 @@ const projects: Project[] = [
     companyWebsite: 'https://www.buoy.studio/',
     keyStats: [
       'Created a responsive and energetic combat & enemy system',
-      'Pushing the limits of ROBLOX constraints - over 300 enemies on screen at once',
+      'Pushing above ROBLOX limits- over 300 enemies on screen at once',
       'Peak of 5K concurrent players'
     ],
   },

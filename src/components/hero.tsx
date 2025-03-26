@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback } from "react";
+import { FiDownload } from "react-icons/fi";
 
 export default function Hero() {
   // Handle smooth scrolling with offset for anchor links
@@ -74,10 +75,10 @@ export default function Hero() {
             </a>
             <a 
               href="/resume.pdf" 
-              className="rounded-full bg-gradient-to-r from-purple-500 to-orange-500 hover:from-purple-600 hover:to-orange-600 px-6 py-3 text-base font-medium text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 flex items-center"
+              className="rounded-full bg-gradient-to-r from-purple-500 to-orange-500 hover:from-purple-600 hover:to-orange-600 px-6 py-3 text-base font-medium text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 flex items-center gap-2"
               download="benjamin-rowlands-cv.pdf"
             >
-              My Resume <span className="ml-1">↓</span>
+              Resume <FiDownload className="inline-block ml-1" />
             </a>
           </motion.div>
           
