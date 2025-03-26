@@ -104,7 +104,7 @@ export default function AboutSection() {
                   <p className="text-white/70">Software Engineering</p>
                 </div>
                 <div className="mt-2 md:mt-0 text-right">
-                  <p>2022 - 2024</p>
+                  <p>2018 - 2021</p>
                   <p className="text-white/70">Upper Second Class Honours (2:1)</p>
                 </div>
               </div>
