@@ -53,7 +53,7 @@ export default function Header() {
             <div className="flex flex-col items-center">
               <Link 
                 href="/" 
-                className="p-2 text-zinc-400 hover:text-transparent hover:bg-gradient-to-r hover:from-purple-500 hover:to-orange-500 hover:bg-clip-text transition-all duration-300"
+                className="p-2 text-zinc-400 hover:text-white transition-all duration-300"
                 onMouseEnter={() => setActiveButton("home")}
                 onMouseLeave={() => setActiveButton(null)}
               >
@@ -70,7 +70,7 @@ export default function Header() {
               <Link 
                 href="#about" 
                 onClick={handleAnchorClick}
-                className="p-2 text-zinc-400 hover:text-transparent hover:bg-gradient-to-r hover:from-purple-500 hover:to-orange-500 hover:bg-clip-text transition-all duration-300"
+                className="p-2 text-zinc-400 hover:text-white transition-all duration-300"
                 onMouseEnter={() => setActiveButton("about")}
                 onMouseLeave={() => setActiveButton(null)}
               >
@@ -87,7 +87,7 @@ export default function Header() {
               <Link 
                 href="#projects" 
                 onClick={handleAnchorClick}
-                className="p-2 text-zinc-400 hover:text-transparent hover:bg-gradient-to-r hover:from-purple-500 hover:to-orange-500 hover:bg-clip-text transition-all duration-300"
+                className="p-2 text-zinc-400 hover:text-white transition-all duration-300"
                 onMouseEnter={() => setActiveButton("projects")}
                 onMouseLeave={() => setActiveButton(null)}
               >
@@ -104,7 +104,7 @@ export default function Header() {
               <Link 
                 href="#contact" 
                 onClick={handleAnchorClick}
-                className="p-2 text-zinc-400 hover:text-transparent hover:bg-gradient-to-r hover:from-purple-500 hover:to-orange-500 hover:bg-clip-text transition-all duration-300"
+                className="p-2 text-zinc-400 hover:text-white transition-all duration-300"
                 onMouseEnter={() => setActiveButton("contact")}
                 onMouseLeave={() => setActiveButton(null)}
               >
@@ -121,7 +121,7 @@ export default function Header() {
               <Link 
                 href="https://www.linkedin.com/in/benjamin-rowlands/" 
                 target="_blank" 
-                className="p-2 text-zinc-400 hover:text-transparent hover:bg-gradient-to-r hover:from-purple-500 hover:to-orange-500 hover:bg-clip-text transition-all duration-300"
+                className="p-2 text-zinc-400 hover:text-white transition-all duration-300"
                 onMouseEnter={() => setActiveButton("linkedin")}
                 onMouseLeave={() => setActiveButton(null)}
               >
@@ -138,7 +138,7 @@ export default function Header() {
               <Link 
                 href="https://github.com/choppedtuna" 
                 target="_blank" 
-                className="p-2 text-zinc-400 hover:text-transparent hover:bg-gradient-to-r hover:from-purple-500 hover:to-orange-500 hover:bg-clip-text transition-all duration-300"
+                className="p-2 text-zinc-400 hover:text-white transition-all duration-300"
                 onMouseEnter={() => setActiveButton("github")}
                 onMouseLeave={() => setActiveButton(null)}
               >

@@ -48,23 +48,30 @@ export default function SectionTitle({ title, subtitle, centered = true }: Secti
     <div className={`mb-8 ${centered ? 'text-center' : ''}`} ref={sectionRef}>
       <h2 
         className={`
+          relative
           text-5xl
           sm:text-5xl
           md:text-6xl
           font-bold
-          tracking-tight
+          tracking-normal
           mb-6 font-nanami
-          text-transparent bg-clip-text
-          animate-gradient-continuous
           transform transition-all duration-700 ease-out
           ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-[-50px] opacity-0'}
         `}
         style={{
-          backgroundImage: 'linear-gradient(90deg, #a855f7,rgb(234, 102, 241), #fb923c,rgb(255, 90, 35), #a855f7)',
           transitionDelay: '100ms'
         }}
       >
-        {title}
+        <div className="ml-3 overflow-visible">
+          <span 
+            className="text-transparent bg-clip-text animate-gradient-continuous"
+            style={{
+              backgroundImage: 'linear-gradient(90deg, #a855f7,rgb(234, 102, 241), #fb923c,rgb(255, 90, 35), #a855f7)'
+            }}
+          >
+            {title}
+          </span>
+        </div>
       </h2>
       {subtitle && (
         <p 
