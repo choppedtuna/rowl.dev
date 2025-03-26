@@ -380,9 +380,8 @@ export default function ProjectsSection() {
             <div className="mt-10 text-center">
               <div className="inline-flex items-center bg-gradient-to-r from-purple-500/10 to-orange-500/10 px-6 py-4 rounded-2xl border border-zinc-200 dark:border-zinc-800">
                 <Users className="h-5 w-5 mr-2 text-purple-500" />
-                <span className="mr-2 font-medium">Total Visits:</span>
                 <span className="text-xl font-bold bg-gradient-to-r from-purple-500 to-orange-500 bg-clip-text text-transparent">
-                  {formatNumber(displayVisits)}
+                  {formatNumber(displayVisits)}+ Visits
                 </span>
               </div>
             </div>

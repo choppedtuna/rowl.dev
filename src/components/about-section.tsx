@@ -11,7 +11,7 @@ import experiences from "@/data/experiences";
 import { 
   SiTypescript, SiNodedotjs, 
   SiExpress, SiGit, SiGithub,
-  SiFigma, SiLua, SiRedis
+  SiFigma, SiLua, SiRedis, SiGooglecloud
 } from "react-icons/si";
 
 export default function AboutSection() {
@@ -50,6 +50,9 @@ export default function AboutSection() {
     { icon: <SiExpress className="h-5 w-5" />, name: "ExpressJS" },
     { icon: <SiRedis className="h-5 w-5 text-purple-600" />, name: "Redis" },
     { icon: <SiFigma className="h-5 w-5 text-purple-400" />, name: "Figma" },
+	{ icon: <SiGooglecloud className="h-5 w-5 text-blue-500" />, name: "Google Cloud" },
+    { icon: <div className="h-5 w-5 relative"><Image src="/images/tech-icons/rojo.png" alt="Rojo" fill className="object-contain" /></div>, name: "Rojo" },
+	{ icon: <div className="h-5 w-5 relative"><Image src="/images/tech-icons/roblox-ts.svg" alt="Roblox-TS" fill className="object-contain" /></div>, name: "Roblox-TS" },
   ];
 
   return (

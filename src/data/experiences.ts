@@ -60,6 +60,7 @@ const experiences: Experience[] = [
     period: "2021 - 2022",
     description: "Created API solutions for B2B clients on Google Cloud Platform. Optimised all solutions using Redis caching to ensure high availability and scalability",
 	skills: ["Node.js", "Typescript","Google Cloud Platform", "Redis", "API Development"],
+	location: "Cardiff, UK",
     icon: React.createElement(Building, { className: "w-5 h-5 text-zinc-300" })
   }
 ];

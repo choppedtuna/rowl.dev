@@ -37,7 +37,7 @@ const projects: Project[] = [
       'Improved UGC strategy leading to a sustained increase in player engagement',
       'Peak of 7K concurrent players'
     ],
-    gameIcon: '/games/nextworld.png'
+    gameIcon: '/images/games/nextworld.png'
   },
   {
     gameId: '16164895787',
@@ -63,7 +63,7 @@ const projects: Project[] = [
 	],
 	isFakeCard: true,
 	manualVisits: 13000000, // This will show as "120K visits"
-	gameIcon: "/games/lego.jpeg",
+	gameIcon: "/images/games/lego.jpeg",
   }
 ];
 
