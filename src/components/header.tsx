@@ -29,7 +29,7 @@ export default function Header() {
       const targetElement = document.getElementById(targetId);
       
       if (targetElement) {
-        const headerHeight = 100; // Match this with the scroll-margin-top in CSS
+        const headerHeight = 20; // Match this with the scroll-margin-top in CSS
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
         
